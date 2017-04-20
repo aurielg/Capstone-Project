@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+math <- read.csv("cp_mathdata_original.csv", header = TRUE)
+```
+```{r}
+#Sex x G3- no real pattern 
+ggplot(math, aes(x= sex, y=G3)) + geom_jitter()
+```
+```{r}
+#Boxplot: Final Grade(G3) x Sex
+ggplot(math, aes(x=sex, y=G3)) + geom_boxplot()
+```
+```{r}
+#Alcohol Consumption (Dalc) by  Grade (G3)
+ggplot(math, aes(x= Dalc, y=G3, col=sex)) + geom_jitter()
+```
+```{r}
+#Boxplot of Dalc by G3
+ggplot(math, aes(x=factor(Dalc), y=G3)) + geom_boxplot()
+```
+
+
