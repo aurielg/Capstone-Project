@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(dplyr)
+library(ggplot2)
+library(outliers)
+```
+
+```{r}
+#merge files
+d1 <- read.csv("student-mat.csv",sep=",", header = TRUE)
+d2 <- read.csv("student-por.csv",sep=",", header = TRUE)
+
+d3=merge(d1,d2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+print(nrow(d3))
+head(d3)
+```
+```{r}
+#Missing values-none
+which(is.na(d3))
+```
+```{r}
+#Important variables:
+#G1, G2, G3, 
+#adress(U/R)
+#Education (Medu/Fedu)
+#Past Failures (1-4)
+#Support
+```
+
+
+```{r}
+#Average grade for math and portugues 
+
+d3<- mutate(d3, AvgMath = (G1.x+G2.x+G3.x)/3, AvgPor = (G1.y+G2.y+G3.y)/3)
+d3$AvgMath<- round(d3$AvgMath, digits=2)
+d3$AvgPor<- round(d3$AvgPor, digits=2)
+head(d3$AvgMath)
+head(d3$AvgPor)
+```
+
+```{r}
+#Mean Math grade = 10.65
+summarise(d3, avgm = mean(AvgMath))
+#Mean Portugues grade = 12.29
+summarise(d3, avgp = mean(AvgPor))
+
+```
+
+
+
