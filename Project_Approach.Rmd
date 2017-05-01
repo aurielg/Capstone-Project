@@ -1,0 +1,91 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(dplyr)
+library(ggplot2)
+library(outliers)
+```
+
+```{r}
+#merge files
+d1 <- read.csv("student-mat.csv",sep=",", header = TRUE)
+d2 <- read.csv("student-por.csv",sep=",", header = TRUE)
+
+d3=merge(d1,d2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+print(nrow(d3))
+head(d3)
+```
+```{r}
+#Missing values-none
+which(is.na(d3))
+```
+```{r}
+#outliers?
+outlier(d3$G1.x)
+outlier(d3$G2.x)
+outlier(d3$G3.x)
+outlier(d3$G1.y)
+outlier(d3$G2.y)
+outlier(d3$G3.y)
+```
+```{r}
+sum(d3$G3.x == 0)
+sum(d3$G3.y == 0)
+
+```
+
+```{r}
+#Important variables:
+#G1, G2, G3, 
+#adress(U/R)
+#Education (Medu/Fedu)
+#Past Failures (1-4)
+#Support
+```
+
+
+```{r}
+#Average grade for math and portugues 
+
+d3<- mutate(d3, AvgMath = (G1.x+G2.x+G3.x)/3, AvgPor = (G1.y+G2.y+G3.y)/3)
+d3$AvgMath<- round(d3$AvgMath, digits=2)
+d3$AvgPor<- round(d3$AvgPor, digits=2)
+head(d3$AvgMath)
+head(d3$AvgPor)
+```
+
+```{r}
+#Mean Math grade = 10.65
+summarise(d3, avgm = mean(AvgMath))
+#Mean Portugues grade = 12.29
+summarise(d3, avgp = mean(AvgPor))
+
+```
+```{r}
+boxplot(d3$AvgMath, varwidth=TRUE, horizontal=TRUE)
+boxplot(d3$AvgPor, varwidth=TRUE, horizontal=TRUE)
+```
+
+```{r}
+#Address- urban/Rural
+ggplot(d3, aes(address, AvgMath)) + stat_boxplot()
+ggplot(d3, aes(address, AvgPor)) + stat_boxplot()
+```
+outliers above
+```{r}
+ggplot(d3, aes(address, AvgMath)) + geom_jitter()
+ggplot(d3, aes(address, AvgPor)) + geom_jitter()
+```
+
+```{r}
+ggplot(d3, aes(AvgPor, AvgMath)) + geom_jitter(aes(color=address))
+
+```
+positive correlation between math and portuguese grades
+```{r}
+#family background
+
+```
+
