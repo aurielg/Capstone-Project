@@ -44,26 +44,26 @@ d3$Fedu <- gsub("3", "secondary", d3$Fedu)
 d3$Fedu <- gsub("4", "higher", d3$Fedu)
 
 #traveltime
-d3$traveltime.x <- gsub("1", "<15m", d3$traveltime.x)
-d3$traveltime.x <- gsub("2", "15-30m", d3$traveltime.x)
-d3$traveltime.x <- gsub("3", "30-60m", d3$traveltime.x)
-d3$traveltime.x <- gsub("4", ">60m", d3$traveltime.x)
+d3$traveltime.x <- gsub("[1]", "<15m", d3$traveltime.x)
+d3$traveltime.x <- gsub("[2]", "15-30m", d3$traveltime.x)
+d3$traveltime.x <- gsub("[3]", "30-60m", d3$traveltime.x)
+d3$traveltime.x <- gsub("[4]", ">60m", d3$traveltime.x)
 
-d3$traveltime.y <- gsub("1", "<15m", d3$traveltime.y)
-d3$traveltime.y <- gsub("2", "15-30m", d3$traveltime.y)
-d3$traveltime.y <- gsub("3", "30-60m", d3$traveltime.y)
-d3$traveltime.y <- gsub("4", ">60m", d3$traveltime.y)
+d3$traveltime.y <- gsub("[1]", "<15m", d3$traveltime.y)
+d3$traveltime.y <- gsub("[2]", "15-30m", d3$traveltime.y)
+d3$traveltime.y <- gsub("[3]", "30-60m", d3$traveltime.y)
+d3$traveltime.y <- gsub("[4]", ">60m", d3$traveltime.y)
 
 #studytime
-d3$studytime.x <- gsub("1", "<2h", d3$studytime.x)
-d3$studytime.x <- gsub("2", "2-5h", d3$studytime.x)
-d3$studytime.x <- gsub("3", "5-10h", d3$studytime.x)
-d3$studytime.x <- gsub("4", ">10h", d3$studytime.x)
+d3$studytime.x <- gsub("[1]", "<2h", d3$studytime.x)
+d3$studytime.x <- gsub("[2]", "2-5h", d3$studytime.x)
+d3$studytime.x <- gsub("[3]", "5-10h", d3$studytime.x)
+d3$studytime.x <- gsub("[4]", ">10h", d3$studytime.x)
 
-d3$studytime.y <- gsub("1", "<2h", d3$studytime.y)
-d3$studytime.y <- gsub("2", "2-5h", d3$studytime.y)
-d3$studytime.y <- gsub("3", "5-10h", d3$studytime.y)
-d3$studytime.y <- gsub("4", ">10h", d3$studytime.y)
+d3$studytime.y <- gsub("[1]", "<2h", d3$studytime.y)
+d3$studytime.y <- gsub("[2]", "2-5h", d3$studytime.y)
+d3$studytime.y <- gsub("[3]", "5-10h", d3$studytime.y)
+d3$studytime.y <- gsub("[4]", ">10h", d3$studytime.y)
 
 #famrel
 d3$famrel.x <- gsub("1", "VeryBad", d3$famrel.x)
