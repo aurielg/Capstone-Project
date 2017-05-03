@@ -1,0 +1,147 @@
+---
+title: "Capstone Project: Data Wrangling"
+output: html_notebook
+---
+```{r}
+#Load the data in RStudio
+library(plyr)
+library(tidyr)
+library(dplyr)
+```
+```{r}
+#merge files
+d1 <- read.csv("student-mat.csv",sep=",", header = TRUE)
+d2 <- read.csv("student-por.csv",sep=",", header = TRUE)
+
+d3=merge(d1,d2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+```
+
+```{r}
+#Rename select columns
+d3 <- rename(d3, paidsup.x=paid.x, paidsup.y=paid.y, DailyAlc.x=Dalc.x, DailyAlc.y=Dalc.y, WeekendAlc.x=Walc.x, WeekendAlc.y=Walc.y, MathG1=G1.x, MathG2=G2.x, MathGFinal=G3.x, PorG1=G1.y, PorG2=G2.y, PorGFinal=G3.y)
+```
+
+```{r}
+# change select column values
+#famsize
+d3$famsize <- gsub("LE3", "<=3", d3$famsize)
+d3$famsize <- gsub("GT3", ">3", d3$famsize)
+#Pstatus
+d3$Pstatus <- gsub("T", "together", d3$Pstatus)
+d3$Pstatus <- gsub("A", "apart", d3$Pstatus)
+
+#Medu
+d3$Medu <- gsub("0", "none", d3$Medu)
+d3$Medu <- gsub("1", "primary", d3$Medu)
+d3$Medu <- gsub("2", "middle", d3$Medu)
+d3$Medu <- gsub("3", "secondary", d3$Medu)
+d3$Medu <- gsub("4", "higher", d3$Medu)
+#Fedu
+d3$Fedu <- gsub("0", "none", d3$Fedu)
+d3$Fedu <- gsub("1", "primary", d3$Fedu)
+d3$Fedu <- gsub("2", "middle", d3$Fedu)
+d3$Fedu <- gsub("3", "secondary", d3$Fedu)
+d3$Fedu <- gsub("4", "higher", d3$Fedu)
+
+#traveltime
+d3$traveltime.x <- gsub("1", "<15m", d3$traveltime.x)
+d3$traveltime.x <- gsub("2", "15-30m", d3$traveltime.x)
+d3$traveltime.x <- gsub("3", "30-60m", d3$traveltime.x)
+d3$traveltime.x <- gsub("4", ">60m", d3$traveltime.x)
+
+d3$traveltime.y <- gsub("1", "<15m", d3$traveltime.y)
+d3$traveltime.y <- gsub("2", "15-30m", d3$traveltime.y)
+d3$traveltime.y <- gsub("3", "30-60m", d3$traveltime.y)
+d3$traveltime.y <- gsub("4", ">60m", d3$traveltime.y)
+
+#studytime
+d3$studytime.x <- gsub("1", "<2h", d3$studytime.x)
+d3$studytime.x <- gsub("2", "2-5h", d3$studytime.x)
+d3$studytime.x <- gsub("3", "5-10h", d3$studytime.x)
+d3$studytime.x <- gsub("4", ">10h", d3$studytime.x)
+
+d3$studytime.y <- gsub("1", "<2h", d3$studytime.y)
+d3$studytime.y <- gsub("2", "2-5h", d3$studytime.y)
+d3$studytime.y <- gsub("3", "5-10h", d3$studytime.y)
+d3$studytime.y <- gsub("4", ">10h", d3$studytime.y)
+
+#famrel
+d3$famrel.x <- gsub("1", "VeryBad", d3$famrel.x)
+d3$famrel.x <- gsub("2", "Bad", d3$famrel.x)
+d3$famrel.x <- gsub("3", "Neutral", d3$famrel.x)
+d3$famrel.x <- gsub("4", "Good", d3$famrel.x)
+d3$famrel.x <- gsub("5", "Excellent", d3$famrel.x)
+
+d3$famrel.y <- gsub("1", "VeryBad", d3$famrel.y)
+d3$famrel.y <- gsub("2", "Bad", d3$famrel.y)
+d3$famrel.y <- gsub("3", "Neutral", d3$famrel.y)
+d3$famrel.y <- gsub("4", "Good", d3$famrel.y)
+d3$famrel.y <- gsub("5", "Excellent", d3$famrel.y)
+
+#freetime
+d3$freetime.x <- gsub("1", "VeryLow", d3$freetime.x)
+d3$freetime.x <- gsub("2", "Low", d3$freetime.x)
+d3$freetime.x <- gsub("3", "Moderate", d3$freetime.x)
+d3$freetime.x <- gsub("4", "High", d3$freetime.x)
+d3$freetime.x <- gsub("5", "VeryHigh", d3$freetime.x)
+
+d3$freetime.y <- gsub("1", "VeryLow", d3$freetime.y)
+d3$freetime.y <- gsub("2", "Low", d3$freetime.y)
+d3$freetime.y <- gsub("3", "Moderate", d3$freetime.y)
+d3$freetime.y <- gsub("4", "High", d3$freetime.y)
+d3$freetime.y <- gsub("5", "VeryHigh", d3$freetime.y)
+
+#goout
+d3$goout.x <- gsub("1", "VeryLow", d3$goout.x)
+d3$goout.x <- gsub("2", "Low", d3$goout.x)
+d3$goout.x <- gsub("3", "Moderate", d3$goout.x)
+d3$goout.x <- gsub("4", "High", d3$goout.x)
+d3$goout.x <- gsub("5", "VeryHigh", d3$goout.x)
+
+d3$goout.y <- gsub("1", "VeryLow", d3$goout.y)
+d3$goout.y <- gsub("2", "Low", d3$goout.y)
+d3$goout.y <- gsub("3", "Moderate", d3$goout.y)
+d3$goout.y <- gsub("4", "High", d3$goout.y)
+d3$goout.y <- gsub("5", "VeryHigh", d3$goout.y)
+
+#DailyAlc
+d3$DailyAlc.x <- gsub("1", "VeryLow", d3$DailyAlc.x)
+d3$DailyAlc.x <- gsub("2", "Low", d3$DailyAlc.x)
+d3$DailyAlc.x <- gsub("3", "Moderate", d3$DailyAlc.x)
+d3$DailyAlc.x <- gsub("4", "High", d3$DailyAlc.x)
+d3$DailyAlc.x <- gsub("5", "VeryHigh", d3$DailyAlc.x)
+
+d3$DailyAlc.y <- gsub("1", "VeryLow", d3$DailyAlc.y)
+d3$DailyAlc.y <- gsub("2", "Low", d3$DailyAlc.y)
+d3$DailyAlc.y <- gsub("3", "Moderate", d3$DailyAlc.y)
+d3$DailyAlc.y <- gsub("4", "High", d3$DailyAlc.y)
+d3$DailyAlc.y <- gsub("5", "VeryHigh", d3$DailyAlc.y)
+
+#WeekendAlc
+d3$WeekendAlc.x <- gsub("1", "VeryLow", d3$WeekendAlc.x)
+d3$WeekendAlc.x <- gsub("2", "Low", d3$WeekendAlc.x)
+d3$WeekendAlc.x <- gsub("3", "Moderate", d3$WeekendAlc.x)
+d3$WeekendAlc.x <- gsub("4", "High", d3$WeekendAlc.x)
+d3$WeekendAlc.x <- gsub("5", "VeryHigh", d3$WeekendAlc.x)
+
+d3$WeekendAlc.y <- gsub("1", "VeryLow", d3$WeekendAlc.y)
+d3$WeekendAlc.y <- gsub("2", "Low", d3$WeekendAlc.y)
+d3$WeekendAlc.y <- gsub("3", "Moderate", d3$WeekendAlc.y)
+d3$WeekendAlc.y <- gsub("4", "High", d3$WeekendAlc.y)
+d3$WeekendAlc.y <- gsub("5", "VeryHigh", d3$WeekendAlc.y)
+
+#health
+d3$health.x <- gsub("1", "VeryBad", d3$health.x)
+d3$health.x <- gsub("2", "Bad", d3$health.x)
+d3$health.x <- gsub("3", "Moderate", d3$health.x)
+d3$health.x <- gsub("4", "Good", d3$health.x)
+d3$health.x <- gsub("5", "VeryGood", d3$health.x)
+
+d3$health.y <- gsub("1", "VeryBad", d3$health.y)
+d3$health.y <- gsub("2", "Bad", d3$health.y)
+d3$health.y <- gsub("3", "Moderate", d3$health.y)
+d3$health.y <- gsub("4", "Good", d3$health.y)
+d3$health.y <- gsub("5", "VeryGood", d3$health.y)
+
+```
+
