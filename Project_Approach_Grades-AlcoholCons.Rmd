@@ -1,0 +1,81 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(tidyr)
+library(dplyr)
+
+```
+```{r}
+#Grade data
+
+boxplot(d3$MathGFinal, varwidth=TRUE, horizontal=TRUE)
+boxplot(d3$PorGFinal, varwidth=TRUE, horizontal=TRUE)
+
+ggplot(d3, aes(MathGFinal)) + geom_histogram(binwidth =1, aes(col="red"))
+ggplot(d3, aes(PorGFinal)) + geom_histogram(binwidth =1, aes(col="red"))
+
+#Mean Math grade = 10.39 
+summarise(d3, avgMath= mean(MathGFinal))
+#Mean Portugues grade = 12.52
+summarise(d3, avgPor= mean(PorGFinal))
+```
+```{r}
+ggplot(d3, aes(MathGFinal, PorGFinal)) + geom_jitter()
+```
+
+
+```{r}
+#famsize
+
+ggplot(d3, aes(famsize)) + geom_bar()
+
+```
+```{r}
+ggplot(d3, aes(famsize, MathGFinal)) + geom_jitter()
+```
+```{r}
+#Alcohol consumption
+
+#Math Daily Alcohol Consumption(DailyAlc.x)
+ggplot(d3, aes(DailyAlc.x)) + geom_histogram(binwidth =1)
+boxplot(d3$DailyAlc.x, varwidth=TRUE, horizontal=TRUE, notch=TRUE)
+
+ggplot(d3, aes(factor(DailyAlc.x), MathGFinal)) + geom_boxplot()
+
+ggplot(d3, aes(DailyAlc.x, MathGFinal)) + geom_jitter()
+
+```
+
+```{r}
+#Math Weekend Alcohol Consumption(WeekendAlc.x)
+ggplot(d3, aes(WeekendAlc.x)) + geom_histogram(binwidth =1)
+boxplot(d3$WeekendAlc.x, varwidth=TRUE, horizontal=TRUE, notch=TRUE)
+
+ggplot(d3, aes(factor(WeekendAlc.x), MathGFinal)) + geom_boxplot()
+
+ggplot(d3, aes(WeekendAlc.x, MathGFinal)) + geom_jitter(aes(col=WeekendAlc.x))
+```
+```{r}
+#Portuguese Daily Alcohol Consumption(DailyAlc.x)
+ggplot(d3, aes(DailyAlc.y)) + geom_histogram(binwidth =1)
+boxplot(d3$DailyAlc.y, varwidth=TRUE, horizontal=TRUE, notch=TRUE)
+
+ggplot(d3, aes(factor(DailyAlc.y), MathGFinal)) + geom_boxplot()
+
+ggplot(d3, aes(DailyAlc.y, MathGFinal)) + geom_jitter()
+```
+```{r}
+#Portuguese Weekend Alcohol Consumption(WeekendAlc.y)
+ggplot(d3, aes(WeekendAlc.y)) + geom_histogram(binwidth =1)
+boxplot(d3$WeekendAlc.y, varwidth=TRUE, horizontal=TRUE, notch=TRUE)
+
+ggplot(d3, aes(factor(WeekendAlc.y), MathGFinal)) + geom_boxplot()
+
+ggplot(d3, aes(WeekendAlc.y, MathGFinal)) + geom_jitter(aes(col=WeekendAlc.x))
+```
+
