@@ -1,0 +1,72 @@
+---
+title: "Family Related Data"
+output: html_notebook
+---
+```{r}
+#Parent Education Levels
+
+ggplot(d3, aes(Medu)) + geom_bar()
+ggplot(d3, aes(Medu, MathGFinal)) + geom_boxplot(aes(col=PorGFinal))
+
+
+ggplot(d3, aes(Fedu)) + geom_bar()
+ggplot(d3, aes(Fedu, MathGFinal)) + geom_boxplot(aes(col=PorGFinal))
+```
+
+```{r}
+d3$Medu <- factor(d3$Medu, levels = c("none", "primary", "middle", "secondary", "higher"))
+d3$Fedu <- factor(d3$Fedu, levels = c("none", "primary", "middle", "secondary", "higher"))
+
+ggplot(d3, aes(Medu, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(Fedu, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(Medu, PorGFinal)) + geom_boxplot()
+ggplot(d3, aes(Fedu, PorGFinal)) + geom_boxplot()
+
+
+```
+```{r}
+#Guardian
+
+ggplot(d3, aes(guardian.x)) + geom_bar()
+ggplot(d3, aes(Pstatus, guardian.x)) + geom_jitter(aes(col=guardian.x))
+```
+
+```{r}
+#family relationship
+d3$famrel.x <- factor(d3$famrel.x, levels = c("VeryBad", "Bad", "Neutral", "Good", "Excellent"))
+ggplot(d3, aes(famrel.x)) + geom_bar()
+```
+```{r}
+ggplot(d3, aes(famrel.x, MathGFinal)) + geom_jitter(aes(col=MathGFinal))
+
+ggplot(d3, aes(famrel.x, MathGFinal)) + geom_boxplot()
+```
+```{r}
+ggplot(d3, aes(address)) + geom_bar()
+
+ggplot(d3, aes(address, MathGFinal)) + geom_jitter()
+ggplot(d3, aes(address, PorGFinal)) + geom_jitter()
+
+ggplot(d3, aes(address, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(address, PorGFinal)) + geom_boxplot()
+```
+```{r}
+#Parent Jobs
+ggplot(d3, aes(Mjob)) + geom_bar()
+ggplot(d3, aes(Mjob, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(Mjob, DailyAlc.x)) + geom_boxplot()
+ggplot(d3, aes(Mjob, DailyAlc.x)) + geom_jitter()
+```
+```{r}
+ggplot(d3, aes(Fjob)) + geom_bar()
+ggplot(d3, aes(Fjob, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(Fjob, DailyAlc.x)) + geom_boxplot()
+ggplot(d3, aes(Fjob, DailyAlc.x)) + geom_jitter()
+```
+```{r}
+ggplot(d3, aes(famsize)) + geom_bar()
+ggplot(d3, aes(famsize, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(famsize, DailyAlc.x)) + geom_boxplot()
+ggplot(d3, aes(famsize, DailyAlc.x)) + geom_jitter()
+```
+
