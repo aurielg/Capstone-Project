@@ -1,0 +1,49 @@
+---
+title: "School and Extra Curricular data"
+output: html_notebook
+---
+
+```{r}
+#health
+
+d3$health.x <- factor(d3$health.x, levels = c("VeryBad", "Bad", "Moderate", "Good", "VeryGood"))
+ggplot(d3, aes(health.x)) + geom_bar()
+ggplot(d3, aes(health.x, MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(health.x, MathGFinal)) + geom_jitter()
+ggplot(d3, aes(health.x, DailyAlc.x)) + geom_boxplot()
+ggplot(d3, aes(health.x, DailyAlc.x)) + geom_jitter()
+```
+
+```{r}
+#failures- 0 failures->higher avg grade
+ggplot(d3, aes(failures.x)) + geom_bar()
+ggplot(d3, aes(factor(failures.x), MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(failures.x, MathGFinal)) + geom_jitter()
+ggplot(d3, aes(factor(failures.x), DailyAlc.x)) + geom_boxplot()
+ggplot(d3, aes(failures.x, DailyAlc.x)) + geom_jitter()
+```
+```{r}
+#school support- not many recieve school support
+ggplot(d3, aes(schoolsup.x)) + geom_bar()
+ggplot(d3, aes(factor(schoolsup.x), MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(schoolsup.x, MathGFinal)) + geom_jitter()
+
+```
+```{r}
+#paid support (tutoring?)
+ggplot(d3, aes(paidsup.x)) + geom_bar()
+ggplot(d3, aes(factor(paidsup.x), MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(paidsup.x, MathGFinal)) + geom_jitter()
+```
+```{r}
+#freetime
+d3$freetime.x <- factor(d3$freetime.x, levels = c("VeryLow", "Low", "Moderate", "High", "VeryHigh"))
+
+ggplot(d3, aes(freetime.x)) + geom_bar()
+ggplot(d3, aes(factor(freetime.x), MathGFinal)) + geom_boxplot()
+ggplot(d3, aes(freetime.x, MathGFinal)) + geom_jitter()
+
+d3$goout.x <- factor(d3$goout.x, levels = c("VeryLow", "Low", "Moderate", "High", "VeryHigh"))
+ggplot(d3, aes(freetime.x, goout.x)) + geom_jitter()
+```
+
